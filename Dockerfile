@@ -8,6 +8,5 @@ COPY . .
 
 # not used in production
 # EXPOSE 3000
-# CMD ["npm", "run", "watch"]
 
-CMD ["npm", "run"]
+CMD ["npm", "start"]
