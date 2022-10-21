@@ -54,7 +54,7 @@ class RoomController {
 
             if(shouldStart) {
                 this.questionRepository.prepareQuestions(room);
-                setTimeout(() => { this.startGame(roomId); }, 3000);
+                setTimeout(() => { this.startGame(roomId); }, 10000);
             }
         }
 
@@ -111,7 +111,5 @@ class RoomController {
     }
 
 }
-
-
 
 export default RoomController;

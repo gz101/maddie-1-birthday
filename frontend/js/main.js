@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function()
             joinedRoomData: {},
             usersInRoom: '',
             question: {},
-            timer: 15,
+            timer: 19,
             selectedVariant: null,
             correctVariant: null,
             rooms: [],
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function()
                     text: questionJson.question,
                     variants: questionJson.variants
                 };
-                vm.$data.timer = 15;
+                vm.$data.timer = 19;
                 vm.$data.correctVariant = null;
                 vm.$data.selectedVariant = null;
             });

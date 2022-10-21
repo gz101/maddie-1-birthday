@@ -29,7 +29,7 @@ export class GameService {
             setTimeout(() => {
 
                 let players = this.roomRepo.getPlayersByRoomId(roomId);
-                let counter = 15;
+                let counter = 19;
 
                 players.map((player: any) => {
                     this.io.to(player.id).emit('newQuestion', JSON.stringify(question));

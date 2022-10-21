@@ -5,6 +5,8 @@ import { Question } from "../models/question.model";
 import { Service } from "typedi";
 import { Room } from "../models/room.model";
 
+import questionsData from "../data/question.data";
+
 const questions: any = {};
 const userAnsweredQuestions: any = {};
 
@@ -27,36 +29,26 @@ class QuestionRepository {
             return this.getQuestionsByRoomId(room.id);
         }
 
-        let tokenBody = await request.get('https://opentdb.com/api_token.php?command=request', {}, async function (err, res, body) {
-            let tokenBodyJson = JSON.parse(body);
-            let token = tokenBodyJson.token;
-            let apiUrl = 'https://opentdb.com/api.php?amount=10&difficulty=easy&type=multiple&token=' + token + (room.category ? `&category=${room.category}` : '') + (room.difficulty ? `&difficulty=${room.difficulty}` : '');
+        questions[room.id] = [];
 
-            await request.get(apiUrl, {}, function (err, res, body) {
-                let bodyJson = JSON.parse(body);
+        questionsData.map((result: any, i: any) => {
+            let correctAnswer = result.correct_answer;
+            let incorrectAnswers = result.incorrect_answers;
+            let variants = [correctAnswer].concat(incorrectAnswers);
 
-                questions[room.id] = [];
+            variants = shuffleArray(variants);
 
-                bodyJson.results.map((result: any, i: any) => {
-                    let correctAnswer = result.correct_answer;
-                    let incorrectAnswers = result.incorrect_answers;
-                    let variants = [correctAnswer].concat(incorrectAnswers);
+            let questionStoreData: Question = {
+                id: i,
+                question: result.question,
+                variants: variants,
+                correctAnswerIndex: variants.indexOf(correctAnswer),
+            }
 
-                    variants = shuffleArray(variants);
-
-                    let questionStoreData: Question = {
-                        id: i,
-                        question: result.question,
-                        variants: variants,
-                        correctAnswerIndex: variants.indexOf(correctAnswer)
-                    }
-
-                    questions[room.id].push(questionStoreData);
-                });
-
-                return questions[room.id];
-            });
+            questions[room.id].push(questionStoreData);
         });
+
+        return questions[room.id];
     }
 
     /**

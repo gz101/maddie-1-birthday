@@ -110,8 +110,9 @@
                     </div>
                 </div>
                 <div class="loader"></div>
-                <p v-if="joinedRoomData.players.length < joinedRoomData.maxPlayers">Waiting for other players to join &nbsp;<b style="font-size: 20px;">{{ joinedRoomData.players.length }}/{{ joinedRoomData.maxPlayers }}</b></p>
-                <p v-if="joinedRoomData.players.length == joinedRoomData.maxPlayers">Game is starting...</p>
+                <p v-if="joinedRoomData.players.length < joinedRoomData.maxPlayers">Choose your avatar while waiting...</p>
+                <p v-if="joinedRoomData.players.length < joinedRoomData.maxPlayers"><b style="font-size: 20px;">{{ joinedRoomData.players.length }}/{{ joinedRoomData.maxPlayers }}</b></p>
+                <p v-if="joinedRoomData.players.length == joinedRoomData.maxPlayers">Starting...choose your avatar, quick!</p>
                 <a href="" class="btn btn-cancel mt10">Cancel</a>
                 <br>
             </div>
@@ -158,10 +159,12 @@
                 </div>
             </div>
 
-            <h3 v-html="(question.id + 1) + '). ' + question.text" class="question-text"></h3>
+            <h5 v-html="(question.id + 1) + '). ' + question.text" class="question-text"></h5>
 
-            <div class="timer-line" v-bind:style="{ width: (((15 - timer) / 15 ) * 100) + '%' }"></div>  
-            <!-- <div>{{timer}}</div> -->
+            <div class="timer-line" v-bind:style="{ width: (((19 - timer) / 19 ) * 100) + '%' }"></div>  
+            <div class="pic-container">
+                <img v-bind:src="'./images/quiz-' + (question.id + 1) + '.jpeg'" class="pic-question">
+            </div>
             <div class="variants">
                 <div class="variant mt10" v-bind:class="{  correct : (variantId == correctVariant), wrong : (variantId == selectedVariant && variantId != correctVariant) }" v-for="variant, variantId in question.variants" v-on:click="answer(question.id, variantId)">
                     <span v-html="['A', 'B', 'C', 'D'][variantId] + ') ' "></span>

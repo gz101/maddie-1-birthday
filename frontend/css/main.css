@@ -186,8 +186,8 @@ hr {
 .question-text {
     font-size: 20px;
     font-weight: 100;
-    min-height: 100px;
-    padding-bottom: 10px;
+    min-height: 50px;
+    padding-bottom: 5px;
 }
 
 .variants {
@@ -196,13 +196,14 @@ hr {
 
 .variants .variant {
     width: 100%;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: 1px solid #ddd;
     box-sizing: border-box;
     border-radius: 10px;
     cursor: pointer;
     transition: .3s background-color;
     box-shadow: 2px 1px 4px #dbdbdb;
+    font-size: 14px;
 }
 
 .variant.correct {
@@ -349,6 +350,14 @@ hr {
 .pic {
     height: 200px;
     width: 200px;
+    object-fit: cover;
+    border-radius: 25px;
+    border: 2px solid #881ac3;
+}
+
+.pic-question {
+    height: 100px;
+    width: 100px;
     object-fit: cover;
     border-radius: 25px;
     border: 2px solid #881ac3;
