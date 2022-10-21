@@ -5,5 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 3000
-CMD ["npm", "run", "watch"]
+
+# not used in production
+# EXPOSE 3000
+# CMD ["npm", "run", "watch"]
+
+CMD ["npm", "run"]
